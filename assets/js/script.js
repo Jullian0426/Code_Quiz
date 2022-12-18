@@ -216,11 +216,11 @@ function clear() {
 
 // View/Hide High Scores
 function viewScr() {
-    if (highscoresEl.style.display === "none") {
+    if (scoreListEl.textContent === "") {
+        return alert("No scores to show.");
+    } else if (highscoresEl.style.display === "none") {
         highscoresEl.style.display = "block";
     } else if (highscoresEl.style.display === "block") {
         highscoresEl.style.display = "none";
-    } else {
-        return alert("No scores to show.");
     }
 };

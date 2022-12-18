@@ -76,6 +76,7 @@ startBtn.addEventListener("click", startQuiz);
 submitBtn.addEventListener("click", addScore);
 backBtn.addEventListener("click", goback);
 clearBtn.addEventListener("click", clear);
+viewScrBtn.addEventListener("click", viewScr);
 // Answer Buttons
 for (let i = 0; i < ansBtn.length; i++) {
     ansBtn[i].addEventListener("click", checkAnswer);
@@ -211,4 +212,15 @@ function goback() {
 function clear() {
     localStorage.clear();
     scoreListEl.textContent = "";
+};
+
+// View/Hide High Scores
+function viewScr() {
+    if (highscoresEl.style.display === "none") {
+        highscoresEl.style.display = "block";
+    } else if (highscoresEl.style.display === "block") {
+        highscoresEl.style.display = "none";
+    } else {
+        return alert("No scores to show.");
+    }
 };

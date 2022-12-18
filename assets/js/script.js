@@ -1,3 +1,4 @@
+// Variables
 // Header Elements
 let viewScrBtn = document.querySelector("#view-scores");
 let timeEl = document.querySelector("#time");
@@ -75,6 +76,7 @@ startBtn.addEventListener("click", startQuiz);
 
 
 
+//Functions
 // Set Timer
 function setTime() {
     let timerInterval = setInterval(function () {
@@ -89,7 +91,7 @@ function setTime() {
             scoreEl.textContent = time;
         }
     }, 1000);
-}
+};
 
 // Start quiz by displaying questions
 function startQuiz() {
@@ -98,5 +100,16 @@ function startQuiz() {
     questionCount = 0;
 
     setTime();
-}
+    setQuestion(questionCount);
+};
 
+// Display Question and answers
+function setQuestion(i) {
+    if (i < questions.length) {
+        questionEl.textContent = questions[i].question;
+        ans1Btn.textContent = questions[i].answers[0];
+        ans2Btn.textContent = questions[i].answers[1];
+        ans3Btn.textContent = questions[i].answers[2];
+        ans4Btn.textContent = questions[i].answers[3];
+    }
+};

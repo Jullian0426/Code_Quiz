@@ -148,3 +148,19 @@ function checkAnswer(event) {
     setQuestion(questionCount);
 };
 
+// Store scorelist onto local storage
+function storeScores() {
+    localStorage.setItem("scoreList", JSON.stringify(scoreList));
+}
+
+// Retrieve scorellist from local storage to be displayed
+function displayScores() {
+    // Get stored scores from localStorage
+    // Parsing the JSON string to an object
+    let storedScoreList = JSON.parse(localStorage.getItem("scoreList"));
+
+    // If scores were retrieved from localStorage, update the scorelist array to it
+    if (storedScoreList !== null) {
+        scoreList = storedScoreList;
+    }
+}

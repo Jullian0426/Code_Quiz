@@ -72,4 +72,19 @@ const questions = [
 
 
 
+function setTime() {
+    let timerInterval = setInterval(function () {
+        time--;
+        timeEl.textContent = `Time: ${time}`;
+
+        if (time === 0 || questionCount === questions.length) {
+            clearInterval(timerInterval);
+            questionsEl.style.display = "none";
+            finishEl.style.display = "block";
+            scoreEl.textContent = time;
+        }
+    }, 1000);
+}
+
+setTime();
 

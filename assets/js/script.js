@@ -74,6 +74,8 @@ const questions = [
 // Event Listeners
 startBtn.addEventListener("click", startQuiz);
 submitBtn.addEventListener("click", addScore);
+backBtn.addEventListener("click", goback);
+clearBtn.addEventListener("click", clear);
 // Answer Buttons
 for (let i = 0; i < ansBtn.length; i++) {
     ansBtn[i].addEventListener("click", checkAnswer);
@@ -195,4 +197,18 @@ function addScore(event) {
     // Add to local storage
     storeScores();
     displayScores();
+};
+
+// Go back to Introduction section
+function goback() {
+    highscoresEl.style.display = "none";
+    introEl.style.display = "block";
+    time = 75;
+    timeEl.textContent = `Time:${time}`;
+};
+
+// Clear local storage
+function clear() {
+    localStorage.clear();
+    scoreListEl.textContent = "";
 };

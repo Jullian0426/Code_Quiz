@@ -73,6 +73,10 @@ const questions = [
 
 // Event Listeners
 startBtn.addEventListener("click", startQuiz);
+// Answer Buttons
+for (let i = 0; i < ansBtn.length; i++) {
+    ansBtn[i].addEventListener("click", checkAnswer);
+}
 
 
 
@@ -113,3 +117,34 @@ function setQuestion(i) {
         ans4Btn.textContent = questions[i].answers[3];
     }
 };
+
+// Check inputed answer and display next question
+function checkAnswer(event) {
+    event.preventDefault();
+
+    // Show section for Correct and Wrong, and append message
+    cwEl.style.display = "block";
+    let p = document.createElement("p");
+    cwEl.appendChild(p);
+
+    // Check Answer
+    if (questions[questionCount].correctAnswer === event.target.value) {
+        p.textContent = "Correct!";
+        // Remove 10s if wrong
+    } else if (questions[questionCount].correctAnswer !== event.target.value) {
+        time = time - 10;
+        p.textContent = "Wrong!";
+    }
+
+    // Timeout after 1 second
+    setTimeout(function () {
+        p.style.display = 'none';
+    }, 1000);
+
+    // Move to next question
+    if (questionCount < questions.length) {
+        questionCount++;
+    }
+    setQuestion(questionCount);
+};
+

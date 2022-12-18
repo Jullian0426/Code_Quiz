@@ -27,7 +27,7 @@ let questionCount = 0
 let finishEl = document.querySelector("#finish");
 let scoreEl = document.querySelector("#score");
 let initialsInput = document.querySelector("#initials");
-let SubmitBtn = document.querySelector("#submit");
+let submitBtn = document.querySelector("#submit");
 
 // Highscores Section
 let highscoresEl = document.querySelector("#highscores");
@@ -73,10 +73,12 @@ const questions = [
 
 // Event Listeners
 startBtn.addEventListener("click", startQuiz);
+submitBtn.addEventListener("click", addScore);
 // Answer Buttons
 for (let i = 0; i < ansBtn.length; i++) {
     ansBtn[i].addEventListener("click", checkAnswer);
 }
+
 
 
 
@@ -151,16 +153,46 @@ function checkAnswer(event) {
 // Store scorelist onto local storage
 function storeScores() {
     localStorage.setItem("scoreList", JSON.stringify(scoreList));
-}
+};
 
 // Retrieve scorellist from local storage to be displayed
 function displayScores() {
-    // Get stored scores from localStorage
-    // Parsing the JSON string to an object
     let storedScoreList = JSON.parse(localStorage.getItem("scoreList"));
 
     // If scores were retrieved from localStorage, update the scorelist array to it
     if (storedScoreList !== null) {
         scoreList = storedScoreList;
     }
-}
+};
+
+// Add inputed score to list and display
+function addScore(event) {
+    event.preventDefault();
+
+    finishEl.style.display = "none";
+    highscoresEl.style.display = "block";
+
+    let init = initialsInput.value.toUpperCase();
+    scoreList.push({ initials: init, score: time });
+
+    // Sort scores from highest to lowest
+    scoreList = scoreList.sort((a, b) => {
+        if (a.score < b.score) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+    
+    // Add a list item for each high score
+    scoreListEl.textContent = "";
+    for (let i = 0; i < scoreList.length; i++) {
+        let li = document.createElement("li");
+        li.textContent = `${scoreList[i].initials}: ${scoreList[i].score}`;
+        scoreListEl.append(li);
+    }
+
+    // Add to local storage
+    storeScores();
+    displayScores();
+};

@@ -70,8 +70,12 @@ const questions = [
     }
 ];
 
+// Event Listeners
+startBtn.addEventListener("click", startQuiz);
 
 
+
+// Set Timer
 function setTime() {
     let timerInterval = setInterval(function () {
         time--;
@@ -79,6 +83,7 @@ function setTime() {
 
         if (time === 0 || questionCount === questions.length) {
             clearInterval(timerInterval);
+            // Stop displaying questions and display finish section
             questionsEl.style.display = "none";
             finishEl.style.display = "block";
             scoreEl.textContent = time;
@@ -86,5 +91,12 @@ function setTime() {
     }, 1000);
 }
 
-setTime();
+// Start quiz by displaying questions
+function startQuiz() {
+    introEl.style.display = "none";
+    questionsEl.style.display = "block";
+    questionCount = 0;
+
+    setTime();
+}
 
